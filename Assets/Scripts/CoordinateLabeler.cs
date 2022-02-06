@@ -4,6 +4,7 @@ using UnityEngine;
 namespace RealmRush
 {
     [ExecuteAlways]
+    [RequireComponent(typeof(TextMeshPro))]
     public class CoordinateLabeler : MonoBehaviour
     {
         [SerializeField] private Color defaultColor = Color.white;
@@ -24,7 +25,7 @@ namespace RealmRush
 
         private void Update()
         {
-            ColorCoordinates();
+            SetLabelColor();
             ToggleLabels();
 
             if (Application.isPlaying) return;
@@ -46,7 +47,7 @@ namespace RealmRush
             transform.parent.name = _coordinates.ToString();
         }
 
-        private void ColorCoordinates()
+        private void SetLabelColor()
         {
             _label.color = _waypoint.IsPlaceable ? defaultColor : blockedColor;
         }

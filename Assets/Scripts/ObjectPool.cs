@@ -7,9 +7,9 @@ namespace RealmRush
     public class ObjectPool : MonoBehaviour
     {
         [SerializeField] private GameObject enemyPrefab;
-        [SerializeField] private float spawnTimer = 1f;
+        [SerializeField] [Range(0.1f, 30f)] private float spawnTimer = 1f;
         [SerializeField] private float waveTimer = 2f;
-        [SerializeField] private int poolSize = 5;
+        [SerializeField] [Range(0, 50)] private int poolSize = 5;
 
         private GameObject[] EnemyPool { get; set; }
 

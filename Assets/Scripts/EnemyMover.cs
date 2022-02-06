@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace RealmRush
 {
+    [RequireComponent(typeof(Enemy))]
     public class EnemyMover : MonoBehaviour
     {
         [SerializeField] [Range(0f, 5f)] private float speed = 1f;
@@ -28,7 +29,7 @@ namespace RealmRush
         private void FindPath()
         {
             _path.Clear();
-            _path = GameObject.FindGameObjectWithTag(PathTag).GetComponentsInChildren<Waypoint>().ToList();
+            _path = GameObject.FindGameObjectWithTag(PathTag)?.GetComponentsInChildren<Waypoint>().ToList();
         }
 
         private void ReturnToStart() => transform.position = _path.First().transform.position;
@@ -54,6 +55,11 @@ namespace RealmRush
                 }
             }
 
+            FinishPath();
+        }
+
+        private void FinishPath()
+        {
             _enemy.StealGold();
             gameObject.SetActive(false);
         }
