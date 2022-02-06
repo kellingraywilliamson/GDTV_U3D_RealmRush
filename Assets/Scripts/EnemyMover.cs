@@ -10,7 +10,13 @@ namespace RealmRush
         [SerializeField] [Range(0f, 5f)] private float speed = 1f;
 
         private List<Waypoint> _path = new();
+        private Enemy _enemy;
         private const string PathTag = "Path";
+
+        private void Start()
+        {
+            _enemy = GetComponent<Enemy>();
+        }
 
         private void OnEnable()
         {
@@ -25,10 +31,8 @@ namespace RealmRush
             _path = GameObject.FindGameObjectWithTag(PathTag).GetComponentsInChildren<Waypoint>().ToList();
         }
 
-        private void ReturnToStart()
-        {
-            transform.position = _path.First().transform.position;
-        }
+        private void ReturnToStart() => transform.position = _path.First().transform.position;
+
 
         private IEnumerator FollowPath()
         {
@@ -50,6 +54,7 @@ namespace RealmRush
                 }
             }
 
+            _enemy.StealGold();
             gameObject.SetActive(false);
         }
     }
